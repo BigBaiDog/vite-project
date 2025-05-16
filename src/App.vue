@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import Editor from './components/Editor.vue';
-
+import Terminal from './components/Terminal.vue';
 </script>
 
 <template>
-  <Editor></Editor>
-
+  <Terminal></Terminal>
 </template>
 
 <style scoped>

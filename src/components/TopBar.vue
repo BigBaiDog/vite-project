@@ -8,7 +8,6 @@
         <a href="javascript:;" class="minimize"></a>
         <a href="javascript:;" class="maximize"></a>
     </header>
-
 </template>
 
 <style scoped lang="less">

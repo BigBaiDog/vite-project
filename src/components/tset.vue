@@ -4,7 +4,7 @@ import Prism from "prismjs";
 import 'prismjs/themes/prism-tomorrow.css'
 // import 'prismjs/themes/prism-okaidia.css'
 import '@fontsource-variable/jetbrains-mono';
-import data from '../data';
+import data from '../assets/data';
 
 const date = (new Date()).toDateString()
 const ip = location.hostname

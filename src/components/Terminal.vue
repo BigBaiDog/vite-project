@@ -2,7 +2,6 @@
 import TopBar from './TopBar.vue';
 import Tset from './tset.vue';
 
-
 </script>
 
 <template>

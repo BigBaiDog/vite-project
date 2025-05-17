@@ -1,22 +1,57 @@
 <script setup lang="ts">
-import date from '../assets/data';  
-function executeACommand(execution :object) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(execution.result);
-        }, execution.duration);
-    });
+import data from '../assets/data';
+import { computed, onMounted, ref } from 'vue';
+
+class Execution {
+    visible: boolean = false;
+    time: string = '';
+    name: string;
+    duration: number = 0;
+    constructor(name: string, duration?: number) {
+        this.name = name;
+        if (duration !== undefined) {
+            this.duration = duration;
+        }
+    }
+    getRandomNumber(): number {
+        const randomNumber = Math.random() * (500 - 300) + 300; // 生成200到300之间的随机数
+        return parseFloat(randomNumber.toFixed(2)); // 精确到小数点后两位
+    }
+    run(): Promise<void> {
+        return new Promise((resolve) => {
+            this.time = new Date().toLocaleTimeString();
+            this.duration = this.getRandomNumber();
+            setTimeout(() => {
+                this.visible = true;
+                resolve();
+            }, this.duration);
+        });
+    }
 }
+
+const executions = ref<Execution[]>([]);
+(data.executions as Array<Execution>).forEach((execution) => {
+    executions.value.push(new Execution(execution.name));
+});
+
+onMounted(() => {
+    executions.value[0].run().then(() => {
+        executions.value[1].run().then(() => {
+            executions.value[2].run();
+        });
+    });
+});
 
 </script>
 
 <template>
-    <span class="prompt">~$ </span>
-    <span class="time">[时间] </span>
-    <span class="task">运行中 </span>
-    <span class="duration">200ms</span>
+    <p v-for="job in executions" v-show="job.visible">
+        <span class="prompt">~$</span>
+        <span class="time">[{{ job.time }}]</span>
+        <span class="task">{{ job.name }}</span>
+        <span class="duration">{{ job.duration }}ms</span>
+    </p>
 </template>
 
 <style scoped lang="less">
-
 </style>

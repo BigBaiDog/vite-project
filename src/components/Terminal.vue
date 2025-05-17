@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import TopBar from './TopBar.vue';
 import Tset from './tset.vue';
+import Executions from './Executions.vue';
 
 </script>
 
 <template>
     <div>
         <TopBar></TopBar>
-        <Tset></Tset>
+        <!-- <Tset></Tset> -->
+        <Executions></Executions>
     </div>
 </template>
 
@@ -18,6 +20,6 @@ div {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #263238;
+    // background: #263238;
 }
 </style>

@@ -41,7 +41,7 @@ function typingAnimation(codeContent: string): Promise<void> {
 }
 
 onMounted(() => {
-    typingAnimation(data.code)
+    typingAnimation(data.code as string)
 })
 
 </script>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import data from '../assets/data';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 class Execution {
     visible: boolean = false;
@@ -30,16 +30,15 @@ class Execution {
 }
 
 const executions = ref<Execution[]>([]);
-(data.executions as Array<Execution>).forEach((execution) => {
+(data.executions as Array<{ name: string }>).forEach((execution) => {
     executions.value.push(new Execution(execution.name));
 });
 
-onMounted(() => {
-    executions.value[0].run().then(() => {
-        executions.value[1].run().then(() => {
-            executions.value[2].run();
-        });
-    });
+onMounted(async () => {
+    await executions.value[0].run();
+    await executions.value[1].run();
+    await executions.value[2].run();
+
 });
 
 </script>
@@ -53,5 +52,4 @@ onMounted(() => {
     </p>
 </template>
 
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>

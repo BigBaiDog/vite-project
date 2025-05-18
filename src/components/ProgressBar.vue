@@ -1,46 +1,49 @@
 <script setup lang="ts">
-import {onMounted ,computed,ref} from 'vue';
+import { ref, watchEffect, computed } from 'vue'
 
-let progress=ref('-------------------------');
-
-const percentage = computed(() => {
-    const hashL = progress.value.split('').filter(c => c === '#').length;
-    return Math.floor((hashL / progress.value.length) * 100);
-});
-
+const { previousEvent = false } = defineProps<{
+    previousEvent: boolean
+}>()
+const visible = ref(false)
+const progress = ref('-------------------------')
+const percentage = computed((): number => {
+    const hashL = progress.value.split('').filter(c => c === '#').length
+    return Math.floor((hashL / progress.value.length) * 100)
+})
 function startLoading(): Promise<void> {
-    return new Promise((resolve) => {
-        let count: number= 0;
-        let rafId :number
-        const step = () => {
-            if (progress.value.indexOf('-') === -1) {
-                cancelAnimationFrame(rafId);
-                resolve();
-            } else {
-                if (count % 3 === 0) {
-                    progress.value = progress.value.replace('-', '#');
+    return new Promise(resolve => {
+        let count: number = 0
+        let rafId: number
+        let step = () => {
+            if (progress.value.indexOf('-') !== -1) {
+                if (count % 10 === 0) {
+                    progress.value = progress.value.replace('-', '#')
                 }
-                count++;
-                rafId = requestAnimationFrame(step);
+                count++
+                rafId = requestAnimationFrame(step)
+            } else {
+                cancelAnimationFrame(rafId)
+                resolve
             }
-        };
-        rafId = requestAnimationFrame(step);
-    });
+        }
+        rafId = requestAnimationFrame(step)
+    })
 }
 
-onMounted(async () => {
-    await startLoading();
-});
+watchEffect(() => {
+    if (previousEvent) {
+        visible.value = true
+        startLoading()
+    }
+})
 </script>
 
 <template>
-    <p class="code">
+    <p v-show="visible">
         <span class="prompt">~$</span>
-        <span class="">{{ progress }}</span>
+        <span class="progress">{{ progress }}</span>
         <span class="percentage">{{ percentage }}%</span>
     </p>
 </template>
 
-<style scoped lang="less">
-
-</style>
+<style scoped lang="less"></style>

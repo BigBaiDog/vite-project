@@ -1,46 +1,47 @@
 <script setup lang="ts">
-import data from '../assets/data';
-import { onMounted, ref } from 'vue';
+import { ref, watchEffect, defineEmits } from 'vue'
+import data from '../assets/data'
 
+const emit = defineEmits(['complete'])
+const { previousEvent = false } = defineProps<{
+    previousEvent: boolean
+}>()
 class Execution {
-    visible: boolean = false;
-    time: string = '';
-    name: string;
-    duration: number = 0;
-    constructor(name: string, duration?: number) {
-        this.name = name;
-        if (duration !== undefined) {
-            this.duration = duration;
-        }
+    visible: boolean = false
+    time: string = ''
+    name: string
+    duration: number = 0
+    constructor(name: string) {
+        this.name = name
     }
     getRandomNumber(): number {
-        const randomNumber = Math.random() * (500 - 300) + 300; // 生成200到300之间的随机数
-        return parseFloat(randomNumber.toFixed(2)); // 精确到小数点后两位
+        const randomNumber = Math.random() * (500 - 300) + 300
+        return parseFloat(randomNumber.toFixed(2))
     }
     run(): Promise<void> {
         return new Promise((resolve) => {
-            this.time = new Date().toLocaleTimeString();
-            this.duration = this.getRandomNumber();
+            this.time = new Date().toLocaleTimeString()
+            this.duration = this.getRandomNumber()
             setTimeout(() => {
-                this.visible = true;
-                resolve();
-            }, this.duration);
-        });
+                this.visible = true
+                resolve()
+            }, this.duration)
+        })
     }
 }
-
 const executions = ref<Execution[]>([]);
 (data.executions as Array<{ name: string }>).forEach((execution) => {
-    executions.value.push(new Execution(execution.name));
-});
+    executions.value.push(new Execution(execution.name))
+})
 
-onMounted(async () => {
-    await executions.value[0].run();
-    await executions.value[1].run();
-    await executions.value[2].run();
-
-});
-
+watchEffect(async () => {
+    if (previousEvent) {
+        await executions.value[0].run()
+        await executions.value[1].run()
+        await executions.value[2].run()
+        emit('complete')
+    }
+})
 </script>
 
 <template>

@@ -5,8 +5,7 @@ interface execution{
   visible: boolean
 }
 const data: { [key: string]: string | Array<execution> } = {
-  code:
-    `
+  code:`
 // 今天心情好
 // 我给你表演写代码
 // 我要开始写啦
@@ -16,8 +15,7 @@ const { 😆, 🤗 } = 🌎;
 Utils.marry(😆,🤗);
 Utils.generateInvitation(😆,🤗);
 // 好了我写完了
-// 我要开始运行啦
-`,
+// 我要开始运行啦`,
   executions: [{
     name: '初始化',
     time: '',

@@ -10,19 +10,16 @@
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.2.5",
-    "@fontsource/cascadia-code": "^5.2.1",
-    "@fontsource/jetbrains-mono": "^5.2.5",
-    "@fontsource/maple-mono": "^5.2.5",
     "prismjs": "^1.30.0",
-    "typed-vue3": "^0.0.2",
-    "vue": "^3.5.13"
+    "typed-vue3": "^0.0.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.2",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@vue/tsconfig": "^0.7.0",
     "less": "^4.3.0",
-    "typescript": "~5.7.2",
-    "vite": "^6.3.1",
-    "vue-tsc": "^2.2.8"
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vue": "^3.5.14",
+    "vue-tsc": "^2.2.10"
   }
 }

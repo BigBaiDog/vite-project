@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest  # 使用最新的Ubuntu环境
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # 检出代码
+        uses: actions/checkout@v4  # 检出代码
  
       - name: Setup Node.js
-        uses: actions/setup-node@v2  # 设置Node.js环境
+        uses: actions/setup-node@v4  # 设置Node.js环境
         with:
           node-version: '14'  # 使用Node.js 14版本
  
@@ -27,7 +27,7 @@ jobs:
           NODE_ENV: production  # 设置环境变量为production
  
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3  # 使用GitHub Pages部署动作
+        uses: peaceiris/actions-gh-pages@v4  # 使用GitHub Pages部署动作
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub的token进行认证
           publish_dir: ./dist  # 指定发布目录为dist（Vite的默认输出目录）

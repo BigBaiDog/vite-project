@@ -1,0 +1,33 @@
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+ 
+on:
+  push:
+    branches:
+      - main  # 当你推送到main分支时触发
+ 
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # 使用最新的Ubuntu环境
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # 检出代码
+ 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2  # 设置Node.js环境
+        with:
+          node-version: '14'  # 使用Node.js 14版本
+ 
+      - name: Install dependencies
+        run: npm install  # 安装依赖
+ 
+      - name: Build project
+        run: npm run build  # 构建项目
+        env:
+          NODE_ENV: production  # 设置环境变量为production
+ 
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3  # 使用GitHub Pages部署动作
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub的token进行认证
+          publish_dir: ./dist  # 指定发布目录为dist（Vite的默认输出目录）

@@ -7,7 +7,7 @@ const { previousEvent = false } = defineProps<{
 }>()
 
 const date = (new Date()).toDateString()
-const ip = location.hostname
+const ip = location.host
 const connected = ref(false)
 
 watchEffect(async () => {

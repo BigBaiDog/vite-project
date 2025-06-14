@@ -19,8 +19,8 @@ watchEffect(async () => {
 </script>
 
 <template>
-    <p v-if="connected">Last login: {{ date }} from {{ ip }}</p>
-    <p v-else>Connecting ...</p>
+    <p v-if="connected"><span>Last login: </span><span>{{ date }} </span><span>from </span><span>{{ ip }}</span></p>
+    <p v-else><span>Connecting ...</span></p>
 </template>
 
 <style lang="less"></style>

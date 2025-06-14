@@ -5,8 +5,7 @@ interface execution{
   visible: boolean
 }
 const data: { [key: string]: string | Array<execution> } = {
-  code:`
-// 今天心情好
+  code:`// 今天心情好
 // 我给你表演写代码
 // 我要开始写啦
 const { 😆, 🤗 } = 🌎;

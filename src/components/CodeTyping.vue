@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect } from 'vue'
 import Prism from "prismjs"
-import 'prismjs/themes/prism-tomorrow.css'
-// import 'prismjs/themes/prism-okaidia.css'
+// import 'prismjs/themes/prism-tomorrow.css'
+import 'prismjs/themes/prism-okaidia.css'
 import '@fontsource-variable/jetbrains-mono'
 import data from '../assets/data'
 
@@ -55,11 +55,14 @@ watchEffect(async () => {
 </template>
 
 <style lang="less">
+pre{
+  white-space: pre-line;
+  margin: auto 12px;
+}
 .cursor {
     color: #BBB;
     animation: blink 500ms step-end infinite;
 }
-
 @keyframes blink {
     50% {
         opacity: 0;
